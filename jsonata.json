@@ -1,0 +1,26 @@
+{
+    "$class": "io.clause.revenueshare.MonthlySalesReport",
+    "sales" : [
+     $map($.data, function($v, $i, $a) {
+           {
+            "$class" : "io.clause.revenueshare.Sale",
+            "transactionId" : "0",
+            "timestamp" : $v[0],
+            "product" : {
+                "$class" : "io.clause.revenueshare.Product",
+                "name" : $v[1],
+                "listPrice" : {
+                    "$class": "org.accordproject.money.MonetaryAmount",
+                    "doubleValue": 200.0,
+                    "currencyCode": "USD"
+                }
+            },
+            "price" : {
+                "$class": "org.accordproject.money.MonetaryAmount",
+                "doubleValue": $number($v[2]),
+                "currencyCode": "USD"
+            }
+        }
+})
+    ]
+}
